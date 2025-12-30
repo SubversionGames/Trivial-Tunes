@@ -1,1 +1,912 @@
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ============================================
+   PROFILE SELECTION
+   ============================================ */
+
+.profile-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+}
+
+.profile-selection h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.profile-selection h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    font-weight: normal;
+}
+
+.profile-buttons {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.profile-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 3px solid white;
+    color: white;
+    font-size: 1.5rem;
+    padding: 30px 60px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.profile-btn:hover {
+    background: white;
+    color: #1e3c72;
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   TEAM NAME ENTRY
+   ============================================ */
+
+.team-name-entry {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.team-name-entry h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.team-name-inputs {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.team-input-group {
+    flex: 1;
+}
+
+.team-input-group h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.team-input-group input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    border: 2px solid white;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #1e3c72;
+}
+
+.start-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 20px 60px;
+    font-size: 1.5rem;
+    background: #00cc00;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.start-btn:hover {
+    background: #00ff00;
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 255, 0, 0.3);
+}
+
+/* ============================================
+   GAME CONTAINER
+   ============================================ */
+
+.game-container {
+    padding: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   VIDEO CONTAINER (for Daily.co)
+   ============================================ */
+
+.video-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ============================================
+   SCORE DISPLAY
+   ============================================ */
+
+.score-display {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-bottom: 30px;
+}
+
+.team-score {
+    text-align: center;
+    padding: 20px 40px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    border: 3px solid white;
+    min-width: 250px;
+}
+
+.team-score h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+
+.score-value {
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.score-value:hover {
+    color: #ffcc00;
+    transform: scale(1.1);
+}
+
+/* ============================================
+   GAME BOARD
+   ============================================ */
+
+.game-board {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    padding: 20px;
+    border: 3px solid white;
+}
+
+.board-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.board-cell {
+    flex: 1;
+    aspect-ratio: 1.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.category-cell {
+    background: #0066cc;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px;
+}
+
+.clue-cell {
+    background: #004080;
+    cursor: pointer;
+    font-size: 2rem;
+    color: #ffcc00;
+}
+
+.clue-cell:hover {
+    background: #0066cc;
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(255, 204, 0, 0.5);
+}
+
+.clue-cell.disabled {
+    background: #001a33;
+    cursor: default;
+    opacity: 0.3;
+}
+
+.clue-cell.disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.clue-cell.trivial-tunes-cell {
+    background: linear-gradient(135deg, #cc00cc 0%, #ff00ff 100%);
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 0, 255, 1);
+    }
+}
+
+/* ============================================
+   CLUE DISPLAY
+   ============================================ */
+
+.clue-display {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 20px;
+    padding: 60px;
+    border: 3px solid white;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 30px auto;
+}
+
+.clue-category {
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: #ffcc00;
+}
+
+.clue-value {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #00ff00;
+    margin-bottom: 30px;
+}
+
+.clue-content {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.clue-answer {
+    font-size: 1.8rem;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-top: 20px;
+    transition: opacity 0.3s ease;
+}
+
+.clue-answer strong {
+    color: #ffcc00;
+}
+
+.clue-answer span {
+    color: white;
+}
+
+/* ============================================
+   BUZZER WINDOW
+   ============================================ */
+
+.buzzer-window {
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid white;
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto 30px auto;
+}
+
+.buzzer-window h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #ffcc00;
+}
+
+.buzzer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.buzz-entry {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.buzz-position {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffcc00;
+    min-width: 30px;
+}
+
+.buzz-player {
+    flex: 1;
+    font-size: 1.2rem;
+}
+
+.buzz-timestamp {
+    font-size: 1rem;
+    color: #aaaaaa;
+    font-family: monospace;
+}
+
+/* ============================================
+   HOST CONTROLS
+   ============================================ */
+
+.host-controls {
+    background: rgba(0, 0, 0, 0.7);
+    border: 3px solid #ff0000;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.audio-controls {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.control-btn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background: #0066cc;
+    color: white;
+    border: 2px solid white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    background: #0088ff;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 136, 255, 0.5);
+}
+
+.score-adjustment {
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    padding-top: 30px;
+}
+
+.score-adjustment h4 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #ffcc00;
+}
+
+.team-selector {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.team-selector label {
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.team-selector input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.adjustment-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.score-btn {
+    padding: 15px 25px;
+    font-size: 1.1rem;
+    border: 2px solid white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.score-btn.minus {
+    background: #cc0000;
+    color: white;
+}
+
+.score-btn.minus:hover {
+    background: #ff0000;
+    transform: scale(1.05);
+}
+
+.score-btn.plus {
+    background: #00cc00;
+    color: white;
+}
+
+.score-btn.plus:hover {
+    background: #00ff00;
+    transform: scale(1.05);
+}
+
+/* ============================================
+   TRIVIAL TUNES
+   ============================================ */
+
+.trivial-tunes-display {
+    background: linear-gradient(135deg, #4a0080 0%, #8000ff 100%);
+    border: 3px solid #ff00ff;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.trivial-tunes-display h2 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    text-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
+}
+
+.tt-artist {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #ffcc00;
+}
+
+.tt-number-selection p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.number-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.number-buttons button {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 3px solid white;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.number-buttons button:hover {
+    background: white;
+    color: #4a0080;
+    transform: scale(1.1);
+}
+
+.tt-album {
+    margin-bottom: 30px;
+}
+
+.tt-album img {
+    max-width: 400px;
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+.tt-timer {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #ff0000;
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+}
+
+.tt-song-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.tt-song-button {
+    padding: 15px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.tt-song-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateX(5px);
+}
+
+.tt-song-button.revealed {
+    background: #00cc00;
+    color: white;
+    font-weight: bold;
+}
+
+.tt-host-controls {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.tt-host-controls .success {
+    background: #00cc00;
+}
+
+.tt-host-controls .success:hover {
+    background: #00ff00;
+}
+
+.tt-host-controls .fail {
+    background: #cc0000;
+}
+
+.tt-host-controls .fail:hover {
+    background: #ff0000;
+}
+
+/* ============================================
+   WHEEL SPINNER
+   ============================================ */
+
+.wheel-spinner {
+    text-align: center;
+    padding: 40px;
+}
+
+.wheel-spinner h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+#wheelCanvas {
+    display: block;
+    margin: 0 auto 30px auto;
+    border: 3px solid white;
+    border-radius: 50%;
+    background: white;
+}
+
+.spin-btn {
+    background: #ff0000;
+    font-size: 2rem;
+    padding: 20px 60px;
+}
+
+.spin-btn:hover {
+    background: #ff3333;
+}
+
+.wheel-result {
+    font-size: 2rem;
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffcc00;
+    font-weight: bold;
+}
+
+/* ============================================
+   FINAL WAGERING
+   ============================================ */
+
+.final-wagering {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    border: 3px solid white;
+}
+
+.final-wagering h2 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.final-category {
+    text-align: center;
+    font-size: 2rem;
+    color: #ffcc00;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+}
+
+.wager-inputs {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.wager-input-group {
+    flex: 1;
+    text-align: center;
+}
+
+.wager-input-group h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.wager-input-group input {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.5rem;
+    border: 2px solid white;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #1e3c72;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.wager-input-group button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background: #0066cc;
+    color: white;
+    border: 2px solid white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.wager-input-group button:hover {
+    background: #0088ff;
+}
+
+.wager-input-group button:disabled {
+    background: #00cc00;
+    cursor: default;
+}
+
+#finalReady {
+    text-align: center;
+}
+
+#finalReady p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #00ff00;
+}
+
+/* ============================================
+   FINAL CLUE DISPLAY
+   ============================================ */
+
+.final-clue-display {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 20px;
+    border: 3px solid white;
+    text-align: center;
+}
+
+.final-clue-content {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    padding: 40px;
+}
+
+.final-answer {
+    font-size: 2rem;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-bottom: 30px;
+    transition: opacity 0.3s ease;
+}
+
+.final-answer strong {
+    color: #ffcc00;
+}
+
+.final-scoring {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
+
+.final-score-team {
+    flex: 1;
+    max-width: 400px;
+}
+
+.final-score-team h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.final-score-team p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #ffcc00;
+}
+
+.final-score-team button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    border: 2px solid white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    background: #0066cc;
+    color: white;
+}
+
+.final-score-team button:hover {
+    background: #0088ff;
+    transform: scale(1.02);
+}
+
+.final-score-team button:disabled {
+    background: #333333;
+    cursor: default;
+    opacity: 0.5;
+}
+
+.final-score-team button:disabled:hover {
+    transform: none;
+}
+
+/* ============================================
+   YOUTUBE PLAYER (HIDDEN)
+   ============================================ */
+
+#youtubePlayer {
+    position: absolute;
+    left: -9999px;
+    width: 0;
+    height: 0;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1200px) {
+    .board-cell {
+        font-size: 1.2rem;
+    }
+    
+    .category-cell {
+        font-size: 1rem;
+    }
+    
+    .clue-cell {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-selection h1 {
+        font-size: 2.5rem;
+    }
+    
+    .profile-buttons {
+        flex-direction: column;
+    }
+    
+    .profile-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .team-name-inputs {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .score-display {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+    
+    .board-row {
+        flex-direction: column;
+    }
+    
+    .board-cell {
+        aspect-ratio: auto;
+        min-height: 60px;
+    }
+    
+    .wager-inputs {
+        flex-direction: column;
+    }
+    
+    .final-scoring {
+        flex-direction: column;
+    }
+    
+    .adjustment-buttons {
+        flex-wrap: wrap;
+    }
+}
