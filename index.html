@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Jeopardy</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Profile Selection Screen (shown first) -->
+    <div id="profileSelection" class="profile-selection">
+        <h1>Music Jeopardy</h1>
+        <h2>Select Your Profile</h2>
+        <div class="profile-buttons">
+            <button onclick="selectProfile('host')" class="profile-btn">Host</button>
+            <button onclick="selectProfile('team1')" class="profile-btn">Team 1</button>
+            <button onclick="selectProfile('team2')" class="profile-btn">Team 2</button>
+            <button onclick="selectProfile('stream')" class="profile-btn">Stream</button>
+        </div>
+    </div>
+
+    <!-- Main Game Container (hidden until profile selected) -->
+    <div id="gameContainer" class="game-container" style="display: none;">
+      
+      <!-- Team Name Entry (shown before game starts) -->
+        <div id="teamNameEntry" class="team-name-entry">
+            <h2>Enter Team Names</h2>
+            <div class="team-name-inputs">
+                <div class="team-input-group">
+                    <h3>Team 1</h3>
+                    <input type="text" id="team1Player1" placeholder="Player 1 Name">
+                    <input type="text" id="team1Player2" placeholder="Player 2 Name">
+                </div>
+                <div class="team-input-group">
+                    <h3>Team 2</h3>
+                    <input type="text" id="team2Player1" placeholder="Player 1 Name">
+                    <input type="text" id="team2Player2" placeholder="Player 2 Name">
+                </div>
+            </div>
+            <button onclick="startGame()" class="start-btn">Start Game</button>
+        </div>
+      
+        <!-- Main Game Screen (hidden until game starts) -->
+        <div id="gameScreen" style="display: none;">
+            
+            <!-- Video Chat Container (if using Daily.co) -->
+            <div id="videoContainer" class="video-container">
+                <!-- Video feeds will be injected here by Daily.co -->
+            </div>
+
+            <!-- Score Display -->
+            <div class="score-display">
+                <div class="team-score" id="team1ScoreDisplay">
+                    <h3 id="team1NameDisplay">Team 1</h3>
+                    <div class="score-value" onclick="editScore('team1')" id="team1Score">0</div>
+                </div>
+                <div class="team-score" id="team2ScoreDisplay">
+                    <h3 id="team2NameDisplay">Team 2</h3>
+                    <div class="score-value" onclick="editScore('team2')" id="team2Score">0</div>
+                </div>
+            </div>
+
+            <!-- Game Board -->
+            <div id="gameBoard" class="game-board">
+                <!-- Categories will be generated here by JavaScript -->
+            </div>
+
+            <!-- Clue Display (shown when a clue is selected) -->
+            <div id="clueDisplay" class="clue-display" style="display: none;">
+                <div class="clue-category" id="clueCategory"></div>
+                <div class="clue-value" id="clueValue"></div>
+                <div class="clue-content" id="clueContent">
+                    <p>Song is playing...</p>
+                </div>
+                <!-- Answer display (only for Host and Stream when revealed) -->
+                <div class="clue-answer" id="clueAnswer" style="display: none;">
+                    <strong>Answer:</strong> <span id="answerText"></span>
+                </div>
+            </div>
