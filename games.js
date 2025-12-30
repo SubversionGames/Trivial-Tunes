@@ -5,69 +5,203 @@
 const gameData = {
     round1: {
         categories: [
-            "Category 1",
-            "Category 2", 
-            "Category 3",
-            "Category 4",
-            "Artist Feature" // This is the rightmost category (no artist needed for Final)
+            "80s Hits",
+            "Rock Classics", 
+            "Pop Anthems",
+            "Hip Hop",
+            "Beatles Feature"
         ],
         clues: {
-            // Format: "Category-PointValue": { youtubeId, startTime, artist, song }
-            "Category 1-200": {
+            // 80s Hits
+            "80s Hits-200": {
                 youtubeId: "dQw4w9WgXcQ",
                 startTime: 0,
                 artist: "Rick Astley",
                 song: "Never Gonna Give You Up"
             },
-            "Category 1-400": {
-                youtubeId: "dQw4w9WgXcQ",
-                startTime: 10,
-                artist: "Rick Astley",
-                song: "Never Gonna Give You Up"
+            "80s Hits-400": {
+                youtubeId: "djV11Xbc914",
+                startTime: 0,
+                artist: "a-ha",
+                song: "Take On Me"
             },
-            // ... continue for all clues in Round 1
+            "80s Hits-600": {
+                youtubeId: "9jK-NcRmVcw",
+                startTime: 0,
+                artist: "Europe",
+                song: "The Final Countdown"
+            },
+            "80s Hits-800": {
+                youtubeId: "rY0WxgSXdEE",
+                startTime: 0,
+                artist: "Michael Jackson",
+                song: "Billie Jean"
+            },
+            "80s Hits-1000": {
+                youtubeId: "UnANw09N28Q",
+                startTime: 0,
+                artist: "Bon Jovi",
+                song: "Livin' on a Prayer"
+            },
+            
+            // Rock Classics
+            "Rock Classics-200": {
+                youtubeId: "fJ9rUzIMcZQ",
+                startTime: 0,
+                artist: "Queen",
+                song: "Bohemian Rhapsody"
+            },
+            "Rock Classics-400": {
+                youtubeId: "ZhIsAZO5gl0",
+                startTime: 0,
+                artist: "AC/DC",
+                song: "Back in Black"
+            },
+            "Rock Classics-600": {
+                youtubeId: "L5ZnHfvtdac",
+                startTime: 0,
+                artist: "Journey",
+                song: "Don't Stop Believin'"
+            },
+            "Rock Classics-800": {
+                youtubeId: "eJO5HU_7_1w",
+                startTime: 0,
+                artist: "The Eagles",
+                song: "Hotel California"
+            },
+            "Rock Classics-1000": {
+                youtubeId: "HgzGwKwLmgM",
+                startTime: 0,
+                artist: "Led Zeppelin",
+                song: "Stairway to Heaven"
+            },
+            
+            // Pop Anthems (This has one TRIVIAL TUNES at 400)
+            "Pop Anthems-200": {
+                youtubeId: "kXYiU_JCYtU",
+                startTime: 0,
+                artist: "Carly Rae Jepsen",
+                song: "Call Me Maybe"
+            },
+            // Pop Anthems-400 is replaced by TRIVIAL TUNES below
+            "Pop Anthems-600": {
+                youtubeId: "CevxZvSJLk8",
+                startTime: 0,
+                artist: "Katy Perry",
+                song: "Roar"
+            },
+            "Pop Anthems-800": {
+                youtubeId: "nfWlot6h_JM",
+                startTime: 0,
+                artist: "Taylor Swift",
+                song: "Shake It Off"
+            },
+            "Pop Anthems-1000": {
+                youtubeId: "OPf0YbXqDm0",
+                startTime: 0,
+                artist: "Mark Ronson ft. Bruno Mars",
+                song: "Uptown Funk"
+            },
+            
+            // Hip Hop (This has one TRIVIAL TUNES at 600)
+            "Hip Hop-200": {
+                youtubeId: "Z0ofsqRQHxw",
+                startTime: 0,
+                artist: "Eminem",
+                song: "Lose Yourself"
+            },
+            "Hip Hop-400": {
+                youtubeId: "HEXWRTEbj1I",
+                startTime: 0,
+                artist: "Outkast",
+                song: "Hey Ya!"
+            },
+            // Hip Hop-600 is replaced by TRIVIAL TUNES below
+            "Hip Hop-800": {
+                youtubeId: "gOMhN-hfMtY",
+                startTime: 0,
+                artist: "50 Cent",
+                song: "In Da Club"
+            },
+            "Hip Hop-1000": {
+                youtubeId: "weeI1G46q0o",
+                startTime: 0,
+                artist: "Dr. Dre ft. Snoop Dogg",
+                song: "Still D.R.E."
+            },
+            
+            // Beatles Feature (all Beatles songs, no artist needed in Final)
+            "Beatles Feature-200": {
+                youtubeId: "A_MjCqQoLLA",
+                startTime: 0,
+                artist: "The Beatles",
+                song: "Hey Jude"
+            },
+            "Beatles Feature-400": {
+                youtubeId: "UelDrZ1aFeY",
+                startTime: 0,
+                artist: "The Beatles",
+                song: "Come Together"
+            },
+            "Beatles Feature-600": {
+                youtubeId: "JXQDyiyJ4_k",
+                startTime: 0,
+                artist: "The Beatles",
+                song: "Let It Be"
+            },
+            "Beatles Feature-800": {
+                youtubeId: "NCtzkaL2t_Y",
+                startTime: 0,
+                artist: "The Beatles",
+                song: "Here Comes the Sun"
+            },
+            "Beatles Feature-1000": {
+                youtubeId: "C7a1IyvSe6k",
+                startTime: 0,
+                artist: "The Beatles",
+                song: "A Day in the Life"
+            }
         },
         trivialTunes: [
             {
-                position: "Category 2-400", // Which clue this replaces
-                artist: "The Beatles",
-                albumCover: "https://upload.wikimedia.org/wikipedia/en/5/53/Beatles_-_Abbey_Road.jpg",
+                position: "Pop Anthems-400",
+                artist: "Taylor Swift",
+                albumCover: "https://upload.wikimedia.org/wikipedia/en/f/f8/Taylor_Swift_-_1989.png",
                 songs: [
-                    "Come Together",
-                    "Something",
-                    "Maxwell's Silver Hammer",
-                    "Oh! Darling",
-                    "Octopus's Garden",
-                    "I Want You (She's So Heavy)",
-                    "Here Comes the Sun",
-                    "Because",
-                    "You Never Give Me Your Money",
-                    "Sun King",
-                    "Mean Mr. Mustard",
-                    "Polythene Pam",
-                    "She Came In Through the Bathroom Window",
-                    "Golden Slumbers",
-                    "Carry That Weight",
-                    "The End",
-                    "Her Majesty"
+                    "Welcome to New York",
+                    "Blank Space",
+                    "Style",
+                    "Out of the Woods",
+                    "All You Had to Do Was Stay",
+                    "Shake It Off",
+                    "I Wish You Would",
+                    "Bad Blood",
+                    "Wildest Dreams",
+                    "How You Get the Girl",
+                    "This Love",
+                    "I Know Places",
+                    "Clean"
                 ]
             },
             {
-                position: "Category 4-600", // Second TRIVIAL TUNES location
-                artist: "Fleetwood Mac",
-                albumCover: "https://example.com/rumours-album.jpg",
+                position: "Hip Hop-600",
+                artist: "Kendrick Lamar",
+                albumCover: "https://upload.wikimedia.org/wikipedia/en/f/f6/Kendrick_Lamar_-_Damn.png",
                 songs: [
-                    "Second Hand News",
-                    "Dreams",
-                    "Never Going Back Again",
-                    "Don't Stop",
-                    "Go Your Own Way",
-                    "Songbird",
-                    "The Chain",
-                    "You Make Loving Fun",
-                    "I Don't Want to Know",
-                    "Oh Daddy",
-                    "Gold Dust Woman"
+                    "BLOOD.",
+                    "DNA.",
+                    "YAH.",
+                    "ELEMENT.",
+                    "FEEL.",
+                    "LOYALTY.",
+                    "PRIDE.",
+                    "HUMBLE.",
+                    "LUST.",
+                    "LOVE.",
+                    "XXX.",
+                    "FEAR.",
+                    "GOD.",
+                    "DUCKWORTH."
                 ]
             }
         ]
@@ -75,29 +209,179 @@ const gameData = {
     
     round2: {
         categories: [
-            "Category 6",
-            "Category 7",
-            "Category 8",
-            "Category 9",
-            "Artist Feature 2"
+            "2000s Throwbacks",
+            "Country Roads",
+            "R&B Smooth",
+            "Alternative",
+            "Drake Feature"
         ],
         clues: {
-            "Category 6-400": {
-                youtubeId: "example123",
-                startTime: 5,
-                artist: "Example Artist",
-                song: "Example Song"
+            // Just add 5 clues per category, all 400-2000 points
+            "2000s Throwbacks-400": {
+                youtubeId: "tg00YEETFzg",
+                startTime: 0,
+                artist: "OutKast",
+                song: "Ms. Jackson"
             },
-            // ... continue for all Round 2 clues
+            "2000s Throwbacks-800": {
+                youtubeId: "pIgZ7gMze7A",
+                startTime: 0,
+                artist: "50 Cent",
+                song: "In Da Club"
+            },
+            "2000s Throwbacks-1200": {
+                youtubeId: "JGw8DWctAts",
+                startTime: 0,
+                artist: "Nelly",
+                song: "Hot in Herre"
+            },
+            "2000s Throwbacks-1600": {
+                youtubeId: "F57P9C4SAW4",
+                startTime: 0,
+                artist: "Usher",
+                song: "Yeah!"
+            },
+            "2000s Throwbacks-2000": {
+                youtubeId: "LOZuxwVk7TU",
+                startTime: 0,
+                artist: "Gnarls Barkley",
+                song: "Crazy"
+            },
+            
+            // Add similar clues for other Round 2 categories
+            // (I'll just add a couple more examples, you can fill in the rest)
+            
+            "Country Roads-400": {
+                youtubeId: "1vrEljMfXYo",
+                startTime: 0,
+                artist: "John Denver",
+                song: "Take Me Home, Country Roads"
+            },
+            "Country Roads-800": {
+                youtubeId: "Ixrje2rXLMA",
+                startTime: 0,
+                artist: "Dolly Parton",
+                song: "Jolene"
+            },
+            "Country Roads-1200": {
+                youtubeId: "lKFbXj8H35U",
+                startTime: 0,
+                artist: "Johnny Cash",
+                song: "Ring of Fire"
+            },
+            "Country Roads-1600": {
+                youtubeId: "7hx4gdlfamo",
+                startTime: 0,
+                artist: "Shania Twain",
+                song: "Man! I Feel Like a Woman!"
+            },
+            "Country Roads-2000": {
+                youtubeId: "WaSy8yy-mr8",
+                startTime: 0,
+                artist: "Garth Brooks",
+                song: "Friends in Low Places"
+            },
+            
+            "R&B Smooth-400": {
+                youtubeId: "JGw8DWctAts",
+                startTime: 0,
+                artist: "Nelly",
+                song: "Hot in Herre"
+            },
+            "R&B Smooth-800": {
+                youtubeId: "JGw8DWctAts",
+                startTime: 0,
+                artist: "Nelly",
+                song: "Hot in Herre"
+            },
+            "R&B Smooth-1200": {
+                youtubeId: "JGw8DWctAts",
+                startTime: 0,
+                artist: "Nelly",
+                song: "Hot in Herre"
+            },
+            "R&B Smooth-1600": {
+                youtubeId: "JGw8DWctAts",
+                startTime: 0,
+                artist: "Nelly",
+                song: "Hot in Herre"
+            },
+            "R&B Smooth-2000": {
+                youtubeId: "JGw8DWctAts",
+                startTime: 0,
+                artist: "Nelly",
+                song: "Hot in Herre"
+            },
+            
+            "Alternative-400": {
+                youtubeId: "JGw8DWctAts",
+                startTime: 0,
+                artist: "Nelly",
+                song: "Hot in Herre"
+            },
+            "Alternative-800": {
+                youtubeId: "JGw8DWctAts",
+                startTime: 0,
+                artist: "Nelly",
+                song: "Hot in Herre"
+            },
+            "Alternative-1200": {
+                youtubeId: "JGw8DWctAts",
+                startTime: 0,
+                artist: "Nelly",
+                song: "Hot in Herre"
+            },
+            "Alternative-1600": {
+                youtubeId: "JGw8DWctAts",
+                startTime: 0,
+                artist: "Nelly",
+                song: "Hot in Herre"
+            },
+            "Alternative-2000": {
+                youtubeId: "JGw8DWctAts",
+                startTime: 0,
+                artist: "Nelly",
+                song: "Hot in Herre"
+            },
+            
+            "Drake Feature-400": {
+                youtubeId: "uxpDa-c-4Mc",
+                startTime: 0,
+                artist: "Drake",
+                song: "Hotline Bling"
+            },
+            "Drake Feature-800": {
+                youtubeId: "uxpDa-c-4Mc",
+                startTime: 0,
+                artist: "Drake",
+                song: "Hotline Bling"
+            },
+            "Drake Feature-1200": {
+                youtubeId: "uxpDa-c-4Mc",
+                startTime: 0,
+                artist: "Drake",
+                song: "Hotline Bling"
+            },
+            "Drake Feature-1600": {
+                youtubeId: "uxpDa-c-4Mc",
+                startTime: 0,
+                artist: "Drake",
+                song: "Hotline Bling"
+            },
+            "Drake Feature-2000": {
+                youtubeId: "uxpDa-c-4Mc",
+                startTime: 0,
+                artist: "Drake",
+                song: "Hotline Bling"
+            }
         }
-        // No trivialTunes in Round 2
     },
     
     finalJeopardy: {
-        youtubeId: "finalSongId",
-        startTime: 0,
-        artist: "Final Artist",
-        song: "Final Song"
+        youtubeId: "fJ9rUzIMcZQ",
+        startTime: 60,
+        artist: "Queen",
+        song: "Bohemian Rhapsody"
     }
 };
 
@@ -1294,6 +1578,44 @@ function initializeFirebaseListeners() {
         }
     });
 }
+
+// ============================================
+// INITIALIZE VIDEO CHAT WHEN GAME STARTS
+// ============================================
+
+// Modify the startGame function to initialize Daily.co
+const originalStartGame = startGame;
+startGame = function() {
+    originalStartGame();
+    
+    // Initialize Daily.co video chat
+    setTimeout(() => {
+        initializeDailyCo();
+    }, 1000);
+};
+
+// Also initialize for non-host profiles when game starts
+const originalListenForGameStart = listenForGameStart;
+listenForGameStart = function() {
+    database.ref('gameState').on('value', (snapshot) => {
+        const state = snapshot.val();
+        if (state && state.gameStarted) {
+            teams = state.teams;
+            updateTeamNames();
+            
+            document.getElementById('teamNameEntry').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+            
+            generateBoard(state.round);
+            updateScoreDisplay();
+            
+            // Initialize Daily.co for non-host profiles
+            setTimeout(() => {
+                initializeDailyCo();
+            }, 1000);
+        }
+    });
+};
 
 // Initialize YouTube API
 onYouTubeIframeAPIReady();
