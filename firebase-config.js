@@ -1,7 +1,8 @@
-// Your web app's Firebase configuration
+// Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCaVkjG2zXHVnY1NXpwsDXPvg_uCNrDsJ8",
   authDomain: "trivial-tunes.firebaseapp.com",
+  databaseURL: "https://trivial-tunes-default-rtdb.firebaseio.com",
   projectId: "trivial-tunes",
   storageBucket: "trivial-tunes.firebasestorage.app",
   messagingSenderId: "320428434618",
@@ -11,4 +12,3 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
-const app = initializeApp(firebaseConfig);
