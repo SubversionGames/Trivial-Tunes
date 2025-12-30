@@ -77,3 +77,164 @@
                     <strong>Answer:</strong> <span id="answerText"></span>
                 </div>
             </div>
+<!-- Buzzer Window -->
+            <div id="buzzerWindow" class="buzzer-window" style="display: none;">
+                <h3>Buzz Order</h3>
+                <div id="buzzerList" class="buzzer-list">
+                    <!-- Buzzer entries will appear here -->
+                </div>
+            </div>
+
+            <!-- Host Controls (only visible to Host) -->
+            <div id="hostControls" class="host-controls" style="display: none;">
+                
+                <!-- Audio Controls -->
+                <div class="audio-controls">
+                    <button onclick="resumeSong()" class="control-btn">Resume Song</button>
+                    <button onclick="backToBoard()" class="control-btn">Back to Board</button>
+                    <button onclick="revealAnswer()" class="control-btn">Reveal Answer</button>
+                </div>
+
+                <!-- Score Adjustment Panel -->
+                <div class="score-adjustment">
+                    <h4>Score Adjustment</h4>
+                    <div class="score-buttons">
+                        <div class="team-selector">
+                            <label>
+                                <input type="radio" name="scoreTeam" value="team1" checked> Team 1
+                            </label>
+                            <label>
+                                <input type="radio" name="scoreTeam" value="team2"> Team 2
+                            </label>
+                        </div>
+                        <div class="adjustment-buttons">
+                            <button onclick="adjustScore('minusFull')" class="score-btn minus">- Full</button>
+                            <button onclick="adjustScore('minusHalf')" class="score-btn minus">- Half</button>
+                            <button onclick="adjustScore('plusHalf')" class="score-btn plus">+ Half</button>
+                            <button onclick="adjustScore('plusFull')" class="score-btn plus">+ Full</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TRIVIAL TUNES Display -->
+            <div id="trivialTunesDisplay" class="trivial-tunes-display" style="display: none;">
+                <h2>TRIVIAL TUNES</h2>
+                <div class="tt-artist" id="ttArtist"></div>
+                <div class="tt-number-selection" id="ttNumberSelection">
+                    <p>How many songs can you name from this album?</p>
+                    <div class="number-buttons">
+                        <button onclick="selectSongCount(1)">1</button>
+                        <button onclick="selectSongCount(2)">2</button>
+                        <button onclick="selectSongCount(3)">3</button>
+                        <button onclick="selectSongCount(4)">4</button>
+                        <button onclick="selectSongCount(5)">5</button>
+                    </div>
+                </div>
+                
+                <div class="tt-album" id="ttAlbum" style="display: none;">
+                    <img id="ttAlbumCover" src="" alt="Album Cover">
+                    <div class="tt-timer" id="ttTimer">30</div>
+                </div>
+
+                <div class="tt-songs" id="ttSongs" style="display: none;">
+                    <h3>Album Tracks:</h3>
+                    <div id="ttSongList" class="tt-song-list">
+                        <!-- Song list will be generated here -->
+                    </div>
+                    <!-- Host Controls for TRIVIAL TUNES -->
+                    <div class="tt-host-controls" id="ttHostControls" style="display: none;">
+                        <button onclick="revealAllTracks()" class="control-btn">Reveal All Tracks</button>
+                        <button onclick="ttSuccess()" class="control-btn success">Success (Award Points)</button>
+                        <button onclick="ttFail()" class="control-btn fail">Fail (No Points)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Wheel Spinner (for Final Jeopardy) -->
+            <div id="wheelSpinner" class="wheel-spinner" style="display: none;">
+                <h2>Final Jeopardy Category Selection</h2>
+                <canvas id="wheelCanvas" width="500" height="500"></canvas>
+                <button onclick="spinWheel()" class="control-btn spin-btn">SPIN</button>
+                <div id="wheelResult" class="wheel-result"></div>
+                <button onclick="startFinalJeopardy()" class="control-btn" id="startFinalBtn" style="display: none;">
+                    Start Final Jeopardy
+                </button>
+            </div>
+
+            <!-- Final Jeopardy Wagering -->
+            <div id="finalWagering" class="final-wagering" style="display: none;">
+                <h2>Final Jeopardy</h2>
+                <div class="final-category" id="finalCategory"></div>
+                
+                <div class="wager-inputs" id="wagerInputs">
+                    <div class="wager-input-group">
+                        <h3 id="finalTeam1Name">Team 1</h3>
+                        <input type="number" id="team1Wager" min="0" placeholder="Enter wager">
+                        <button onclick="submitWager('team1')">Lock Wager</button>
+                    </div>
+                    <div class="wager-input-group">
+                        <h3 id="finalTeam2Name">Team 2</h3>
+                        <input type="number" id="team2Wager" min="0" placeholder="Enter wager">
+                        <button onclick="submitWager('team2')">Lock Wager</button>
+                    </div>
+                </div>
+
+                <div id="finalReady" style="display: none;">
+                    <p>Both teams have locked their wagers!</p>
+                    <button onclick="playFinalClue()" class="control-btn">Play Final Clue</button>
+                </div>
+            </div>
+
+            <!-- Final Jeopardy Clue Display -->
+            <div id="finalClueDisplay" class="final-clue-display" style="display: none;">
+                <div class="final-clue-content">
+                    <p>Song is playing...</p>
+                </div>
+                <div class="final-answer" id="finalAnswer" style="display: none;">
+                    <strong>Answer:</strong> <span id="finalAnswerText"></span>
+                </div>
+                
+                <!-- Final Scoring (Host only) -->
+                <div id="finalScoring" class="final-scoring" style="display: none;">
+                    <div class="final-score-team">
+                        <h3 id="finalScoringTeam1Name">Team 1</h3>
+                        <p>Wager: <span id="team1WagerDisplay"></span></p>
+                        <button onclick="finalAdjustScore('team1', 'full')">Correct (Full)</button>
+                        <button onclick="finalAdjustScore('team1', 'half')">Partial (Half)</button>
+                        <button onclick="finalAdjustScore('team1', 'wrongHalf')">Wrong Artist/Song (-Half)</button>
+                        <button onclick="finalAdjustScore('team1', 'wrongFull')">Wrong Both (-Full)</button>
+                    </div>
+                    <div class="final-score-team">
+                        <h3 id="finalScoringTeam2Name">Team 2</h3>
+                        <p>Wager: <span id="team2WagerDisplay"></span></p>
+                        <button onclick="finalAdjustScore('team2', 'full')">Correct (Full)</button>
+                        <button onclick="finalAdjustScore('team2', 'half')">Partial (Half)</button>
+                        <button onclick="finalAdjustScore('team2', 'wrongHalf')">Wrong Artist/Song (-Half)</button>
+                        <button onclick="finalAdjustScore('team2', 'wrongFull')">Wrong Both (-Full)</button>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- End of gameScreen -->
+    </div> <!-- End of gameContainer -->
+
+    <!-- Hidden YouTube Player -->
+    <div id="youtubePlayer"></div>
+
+    <!-- Load Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    
+    <!-- Load YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    
+    <!-- Load Firebase Config -->
+    <script src="firebase-config.js"></script>
+    
+    <!-- Main Game JavaScript (we'll create this next) -->
+    <script src="game.js"></script>
+
+</body>
+</html>
