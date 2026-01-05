@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Jeopardy</title>
+    <title>Blurred Reality: Trivial Tunes</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -45,19 +45,13 @@
             
             <!-- Top Bar: Videos and Scores -->
             <div class="top-bar">
-                <!-- Host Video - Top Left -->
-                <div id="videoHost" class="video-frame video-host"></div>
+                <!-- Left Column: Host + Team 1 -->
+                <div class="left-videos">
+                    <div id="videoHost" class="video-frame video-host">HOST</div>
+                    <div id="videoTeam1" class="video-frame video-team1">TEAM 1</div>
+                </div>
                 
-                <!-- Stream Video - Top Right -->
-                <div id="videoStream" class="video-frame video-stream"></div>
-                
-                <!-- Team 1 Videos - Bottom Left -->
-                <div id="videoTeam1" class="video-frame video-team1"></div>
-                
-                <!-- Team 2 Videos - Bottom Right -->
-                <div id="videoTeam2" class="video-frame video-team2"></div>
-                
-                <!-- Score Display - Center -->
+                <!-- Center: Score Display -->
                 <div class="score-display">
                     <div class="team-score" id="team1ScoreDisplay">
                         <h3 id="team1NameDisplay">Team 1</h3>
@@ -67,6 +61,12 @@
                         <h3 id="team2NameDisplay">Team 2</h3>
                         <div class="score-value" onclick="editScore('team2')" id="team2Score">0</div>
                     </div>
+                </div>
+                
+                <!-- Right Column: Team 2 + Stream -->
+                <div class="right-videos">
+                    <div id="videoTeam2" class="video-frame video-team2">TEAM 2</div>
+                    <div id="videoStream" class="video-frame video-stream">STREAM</div>
                 </div>
             </div>
 
