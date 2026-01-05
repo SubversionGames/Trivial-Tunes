@@ -30,47 +30,105 @@ function initializeDailyCo() {
         return;
     }
     
-    // Determine which container to use based on current profile
-    let targetContainer;
-    if (currentProfile === 'host') {
-        targetContainer = document.getElementById('videoHost');
-    } else if (currentProfile === 'team1') {
-        targetContainer = document.getElementById('videoTeam1');
-    } else if (currentProfile === 'team2') {
-        targetContainer = document.getElementById('videoTeam2');
-    } else if (currentProfile === 'stream') {
-        targetContainer = document.getElementById('videoStream');
-    }
+    // Everyone joins the same call, but we'll create ONE shared frame
+    // that shows all participants
     
-    if (!targetContainer) {
-        console.error('Video container not found for profile:', currentProfile);
-        return;
-    }
+    // We'll use a single container that shows all participants
+    // Each profile will join the same room and see everyone
     
-    // Create Daily call frame in the appropriate container
-    dailyCallObject = window.DailyIframe.createFrame(targetContainer, {
+    let targetContainer = document.getElementById('videoHost'); // Use host container as main view
+    
+    // For non-host profiles, we still want to show all participants
+    // So let's create the frame in a way that shows everyone
+    
+    dailyCallObject = window.DailyIframe.createCallObject({
         showLeaveButton: false,
-        showFullscreenButton: false,
-        iframeStyle: {
-            width: '100%',
-            height: '100%',
-            border: 'none',
-            borderRadius: '10px'
-        }
+        showFullscreenButton: false
     });
     
     // Join the room
-    dailyCallObject.join({ url: DAILY_ROOM_URL });
+    dailyCallObject.join({ url: DAILY_ROOM_URL })
+        .then(() => {
+            console.log('Successfully joined Daily.co room');
+            
+            // Set username based on profile
+            let userName = currentProfile.toUpperCase();
+            if (currentProfile === 'team1') {
+                userName = teams.team1.players.join(' / ');
+            } else if (currentProfile === 'team2') {
+                userName = teams.team2.players.join(' / ');
+            }
+            
+            dailyCallObject.setUserName(userName);
+            
+            // Now we need to show the video in the appropriate container
+            setupVideoDisplay();
+        })
+        .catch(err => {
+            console.error('Failed to join Daily.co room:', err);
+        });
+}
+
+function setupVideoDisplay() {
+    // Get all participants
+    dailyCallObject.on('participant-joined', updateVideoLayout);
+    dailyCallObject.on('participant-updated', updateVideoLayout);
+    dailyCallObject.on('participant-left', updateVideoLayout);
     
-    // Set username based on profile
-    let userName = currentProfile;
-    if (currentProfile === 'team1') {
-        userName = teams.team1.players.join(' / ');
-    } else if (currentProfile === 'team2') {
-        userName = teams.team2.players.join(' / ');
-    }
+    // Initial layout
+    updateVideoLayout();
+}
+
+function updateVideoLayout() {
+    const participants = dailyCallObject.participants();
     
-    dailyCallObject.setUserName(userName);
+    // Clear all video containers first
+    ['videoHost', 'videoTeam1', 'videoTeam2', 'videoStream'].forEach(id => {
+        const container = document.getElementById(id);
+        if (container) {
+            // Keep the label but prepare for video
+            const existingVideo = container.querySelector('video');
+            if (existingVideo) {
+                existingVideo.remove();
+            }
+        }
+    });
+    
+    // Place each participant in their designated container based on username
+    Object.values(participants).forEach(participant => {
+        const userName = (participant.user_name || '').toLowerCase();
+        let targetContainerId = null;
+        
+        if (userName.includes('host')) {
+            targetContainerId = 'videoHost';
+        } else if (userName.includes('team1') || userName.includes('team 1')) {
+            targetContainerId = 'videoTeam1';
+        } else if (userName.includes('team2') || userName.includes('team 2')) {
+            targetContainerId = 'videoTeam2';
+        } else if (userName.includes('stream')) {
+            targetContainerId = 'videoStream';
+        }
+        
+        if (targetContainerId && participant.video) {
+            const container = document.getElementById(targetContainerId);
+            const videoTrack = participant.tracks.video.persistentTrack;
+            
+            if (container && videoTrack) {
+                // Create video element
+                const videoEl = document.createElement('video');
+                videoEl.srcObject = new MediaStream([videoTrack]);
+                videoEl.autoplay = true;
+                videoEl.playsInline = true;
+                videoEl.style.width = '100%';
+                videoEl.style.height = '100%';
+                videoEl.style.objectFit = 'cover';
+                
+                // Clear container and add video
+                container.innerHTML = '';
+                container.appendChild(videoEl);
+            }
+        }
+    });
 }
 
 // Clean up Daily call when leaving
