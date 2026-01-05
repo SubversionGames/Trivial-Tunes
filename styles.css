@@ -144,19 +144,25 @@ body {
 
 .game-container {
     padding: 20px;
-    max-width: 1600px;
+    max-width: 1800px;
     margin: 0 auto;
 }
 
 /* ============================================
-   TOP BAR - VIDEO AND SCORES LAYOUT
+   MAIN GAME LAYOUT
    ============================================ */
 
-.top-bar {
+.game-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Top row: Videos and Scores in one line */
+.top-row {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 30px;
     gap: 20px;
 }
 
@@ -172,8 +178,8 @@ body {
     font-size: 1.5rem;
     font-weight: bold;
     color: white;
-    width: 200px;
-    height: 150px;
+    width: 250px;
+    height: 250px;
 }
 
 .video-frame iframe {
@@ -182,20 +188,17 @@ body {
     border: none;
 }
 
-/* Score display styling */
-.score-display {
-    display: flex;
-    gap: 20px;
+/* Game board - Full width below */
+.game-board {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    padding: 20px;
+    border: 3px solid white;
 }
 
 /* ============================================
    SCORE DISPLAY
    ============================================ */
-
-.score-display {
-    justify-content: center;
-    margin-bottom: 30px;
-}
 
 .team-score {
     text-align: center;
@@ -204,6 +207,10 @@ body {
     border-radius: 15px;
     border: 3px solid white;
     min-width: 250px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .team-score h3 {
