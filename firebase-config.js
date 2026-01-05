@@ -30,20 +30,34 @@ function initializeDailyCo() {
         return;
     }
     
-    // Create Daily call frame in the video container
-    dailyCallObject = window.DailyIframe.createFrame(
-        document.getElementById('videoContainer'),
-        {
-            showLeaveButton: false,
-            showFullscreenButton: true,
-            iframeStyle: {
-                width: '100%',
-                height: '400px',
-                border: '2px solid white',
-                borderRadius: '15px'
-            }
+    // Determine which container to use based on current profile
+    let targetContainer;
+    if (currentProfile === 'host') {
+        targetContainer = document.getElementById('videoHost');
+    } else if (currentProfile === 'team1') {
+        targetContainer = document.getElementById('videoTeam1');
+    } else if (currentProfile === 'team2') {
+        targetContainer = document.getElementById('videoTeam2');
+    } else if (currentProfile === 'stream') {
+        targetContainer = document.getElementById('videoStream');
+    }
+    
+    if (!targetContainer) {
+        console.error('Video container not found for profile:', currentProfile);
+        return;
+    }
+    
+    // Create Daily call frame in the appropriate container
+    dailyCallObject = window.DailyIframe.createFrame(targetContainer, {
+        showLeaveButton: false,
+        showFullscreenButton: false,
+        iframeStyle: {
+            width: '100%',
+            height: '100%',
+            border: 'none',
+            borderRadius: '10px'
         }
-    );
+    });
     
     // Join the room
     dailyCallObject.join({ url: DAILY_ROOM_URL });
