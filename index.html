@@ -43,15 +43,26 @@
         <!-- Main Game Screen (hidden until game starts) -->
         <div id="gameScreen" style="display: none;">
             
-            <!-- Top Bar: Videos and Scores in One Line -->
-            <div class="top-bar">
-                <!-- Host Video -->
+            <!-- Main Game Layout -->
+            <div class="game-layout">
+                <!-- Host Video - Left side -->
                 <div id="videoHost" class="video-frame video-host">HOST</div>
                 
-                <!-- Team 1 Video -->
+                <!-- Team 1 Video - Above left of board -->
                 <div id="videoTeam1" class="video-frame video-team1">TEAM 1</div>
                 
-                <!-- Scores -->
+                <!-- Team 2 Video - Above right of board -->
+                <div id="videoTeam2" class="video-frame video-team2">TEAM 2</div>
+                
+                <!-- Stream Video - Right side -->
+                <div id="videoStream" class="video-frame video-stream">STREAM</div>
+                
+                <!-- Game Board - Center -->
+                <div id="gameBoard" class="game-board">
+                    <!-- Categories will be generated here by JavaScript -->
+                </div>
+                
+                <!-- Score Display - Below board -->
                 <div class="score-display">
                     <div class="team-score" id="team1ScoreDisplay">
                         <h3 id="team1NameDisplay">Team 1</h3>
@@ -61,30 +72,6 @@
                         <h3 id="team2NameDisplay">Team 2</h3>
                         <div class="score-value" onclick="editScore('team2')" id="team2Score">0</div>
                     </div>
-                </div>
-                
-                <!-- Team 2 Video -->
-                <div id="videoTeam2" class="video-frame video-team2">TEAM 2</div>
-                
-                <!-- Stream Video -->
-                <div id="videoStream" class="video-frame video-stream">STREAM</div>
-            </div>
-
-            <!-- Game Board -->
-            <div id="gameBoard" class="game-board">
-                <!-- Categories will be generated here by JavaScript -->
-            </div>
-
-            <!-- Clue Display (shown when a clue is selected) -->
-            <div id="clueDisplay" class="clue-display" style="display: none;">
-                <div class="clue-category" id="clueCategory"></div>
-                <div class="clue-value" id="clueValue"></div>
-                <div class="clue-content" id="clueContent">
-                    <p>Song is playing...</p>
-                </div>
-                <!-- Answer display (only for Host and Stream when revealed) -->
-                <div class="clue-answer" id="clueAnswer" style="display: none;">
-                    <strong>Answer:</strong> <span id="answerText"></span>
                 </div>
             </div>
 
