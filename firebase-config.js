@@ -18,9 +18,7 @@ const database = firebase.database();
 // ============================================
 
 // IMPORTANT: Replace this with your Daily.co room URL
-// Get this by signing up at https://daily.co (free account)
-// Then create a room and paste the URL here
-const DAILY_ROOM_URL = "https://subversion-games.daily.co/TrivialTunes";
+const DAILY_ROOM_URL = "https://YOUR-DOMAIN.daily.co/YOUR-ROOM-NAME";
 
 let dailyCallObject = null;
 
@@ -30,110 +28,145 @@ function initializeDailyCo() {
         return;
     }
     
-    // Everyone joins the same call, but we'll create ONE shared frame
-    // that shows all participants
-    
-    // We'll use a single container that shows all participants
-    // Each profile will join the same room and see everyone
-    
-    let targetContainer = document.getElementById('videoHost'); // Use host container as main view
-    
-    // For non-host profiles, we still want to show all participants
-    // So let's create the frame in a way that shows everyone
-    
+    // Create a call object (gives us more control than iframe)
     dailyCallObject = window.DailyIframe.createCallObject({
-        showLeaveButton: false,
-        showFullscreenButton: false
+        audioSource: true,
+        videoSource: true
     });
     
-    // Join the room
-    dailyCallObject.join({ url: DAILY_ROOM_URL })
-        .then(() => {
-            console.log('Successfully joined Daily.co room');
-            
-            // Set username based on profile
-            let userName = currentProfile.toUpperCase();
-            if (currentProfile === 'team1') {
-                userName = teams.team1.players.join(' / ');
-            } else if (currentProfile === 'team2') {
-                userName = teams.team2.players.join(' / ');
-            }
-            
-            dailyCallObject.setUserName(userName);
-            
-            // Now we need to show the video in the appropriate container
-            setupVideoDisplay();
-        })
-        .catch(err => {
-            console.error('Failed to join Daily.co room:', err);
-        });
+    // Set up event listeners BEFORE joining
+    dailyCallObject
+        .on('joined-meeting', handleJoinedMeeting)
+        .on('participant-joined', handleParticipantUpdate)
+        .on('participant-updated', handleParticipantUpdate)
+        .on('participant-left', handleParticipantLeft);
+    
+    // Determine username based on profile
+    let userName = currentProfile.toUpperCase();
+    if (currentProfile === 'team1') {
+        userName = 'TEAM1';
+    } else if (currentProfile === 'team2') {
+        userName = 'TEAM2';
+    } else if (currentProfile === 'stream') {
+        userName = 'STREAM';
+    } else if (currentProfile === 'host') {
+        userName = 'HOST';
+    }
+    
+    // Join the room with the username
+    dailyCallObject.join({ 
+        url: DAILY_ROOM_URL,
+        userName: userName
+    }).catch(err => {
+        console.error('Failed to join Daily.co:', err);
+    });
 }
 
-function setupVideoDisplay() {
-    // Get all participants
-    dailyCallObject.on('participant-joined', updateVideoLayout);
-    dailyCallObject.on('participant-updated', updateVideoLayout);
-    dailyCallObject.on('participant-left', updateVideoLayout);
+function handleJoinedMeeting(event) {
+    console.log('Joined meeting as:', event.participants.local.user_name);
     
-    // Initial layout
-    updateVideoLayout();
+    // Add local video to the appropriate container
+    addVideoToContainer(event.participants.local);
+    
+    // Add all existing remote participants
+    Object.values(event.participants).forEach(participant => {
+        if (!participant.local) {
+            addVideoToContainer(participant);
+        }
+    });
 }
 
-function updateVideoLayout() {
-    const participants = dailyCallObject.participants();
+function handleParticipantUpdate(event) {
+    console.log('Participant updated:', event.participant.user_name);
+    addVideoToContainer(event.participant);
+}
+
+function handleParticipantLeft(event) {
+    console.log('Participant left:', event.participant.user_name);
+    removeVideoFromContainer(event.participant);
+}
+
+function addVideoToContainer(participant) {
+    const userName = (participant.user_name || '').toUpperCase();
+    let containerId = null;
     
-    // Clear all video containers first
-    ['videoHost', 'videoTeam1', 'videoTeam2', 'videoStream'].forEach(id => {
-        const container = document.getElementById(id);
+    // Map username to container
+    if (userName.includes('HOST')) {
+        containerId = 'videoHost';
+    } else if (userName.includes('TEAM1')) {
+        containerId = 'videoTeam1';
+    } else if (userName.includes('TEAM2')) {
+        containerId = 'videoTeam2';
+    } else if (userName.includes('STREAM')) {
+        containerId = 'videoStream';
+    }
+    
+    if (!containerId) {
+        console.warn('No container found for participant:', userName);
+        return;
+    }
+    
+    const container = document.getElementById(containerId);
+    if (!container) {
+        console.error('Container not found:', containerId);
+        return;
+    }
+    
+    // Check if participant has video track
+    if (participant.video && participant.tracks?.video?.persistentTrack) {
+        // Remove existing content
+        container.innerHTML = '';
+        
+        // Create video element
+        const videoEl = document.createElement('video');
+        videoEl.id = `video-${participant.session_id}`;
+        videoEl.autoplay = true;
+        videoEl.playsInline = true;
+        videoEl.muted = participant.local; // Mute own video to avoid echo
+        videoEl.style.width = '100%';
+        videoEl.style.height = '100%';
+        videoEl.style.objectFit = 'cover';
+        
+        // Set video source
+        const stream = new MediaStream([participant.tracks.video.persistentTrack]);
+        if (participant.audio && participant.tracks?.audio?.persistentTrack) {
+            stream.addTrack(participant.tracks.audio.persistentTrack);
+        }
+        videoEl.srcObject = stream;
+        
+        container.appendChild(videoEl);
+    } else {
+        // No video, show username
+        container.innerHTML = `<span>${userName}</span>`;
+    }
+}
+
+function removeVideoFromContainer(participant) {
+    const userName = (participant.user_name || '').toUpperCase();
+    let containerId = null;
+    
+    if (userName.includes('HOST')) {
+        containerId = 'videoHost';
+    } else if (userName.includes('TEAM1')) {
+        containerId = 'videoTeam1';
+    } else if (userName.includes('TEAM2')) {
+        containerId = 'videoTeam2';
+    } else if (userName.includes('STREAM')) {
+        containerId = 'videoStream';
+    }
+    
+    if (containerId) {
+        const container = document.getElementById(containerId);
         if (container) {
-            // Keep the label but prepare for video
-            const existingVideo = container.querySelector('video');
-            if (existingVideo) {
-                existingVideo.remove();
-            }
+            container.innerHTML = `<span>${userName}</span>`;
         }
-    });
-    
-    // Place each participant in their designated container based on username
-    Object.values(participants).forEach(participant => {
-        const userName = (participant.user_name || '').toLowerCase();
-        let targetContainerId = null;
-        
-        if (userName.includes('host')) {
-            targetContainerId = 'videoHost';
-        } else if (userName.includes('team1') || userName.includes('team 1')) {
-            targetContainerId = 'videoTeam1';
-        } else if (userName.includes('team2') || userName.includes('team 2')) {
-            targetContainerId = 'videoTeam2';
-        } else if (userName.includes('stream')) {
-            targetContainerId = 'videoStream';
-        }
-        
-        if (targetContainerId && participant.video) {
-            const container = document.getElementById(targetContainerId);
-            const videoTrack = participant.tracks.video.persistentTrack;
-            
-            if (container && videoTrack) {
-                // Create video element
-                const videoEl = document.createElement('video');
-                videoEl.srcObject = new MediaStream([videoTrack]);
-                videoEl.autoplay = true;
-                videoEl.playsInline = true;
-                videoEl.style.width = '100%';
-                videoEl.style.height = '100%';
-                videoEl.style.objectFit = 'cover';
-                
-                // Clear container and add video
-                container.innerHTML = '';
-                container.appendChild(videoEl);
-            }
-        }
-    });
+    }
 }
 
 // Clean up Daily call when leaving
 window.addEventListener('beforeunload', () => {
     if (dailyCallObject) {
         dailyCallObject.leave();
+        dailyCallObject.destroy();
     }
 });
