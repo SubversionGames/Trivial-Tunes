@@ -43,15 +43,15 @@
         <!-- Main Game Screen (hidden until game starts) -->
         <div id="gameScreen" style="display: none;">
             
-            <!-- Top Bar: Videos and Scores -->
+            <!-- Top Bar: Videos and Scores in One Line -->
             <div class="top-bar">
-                <!-- Left Column: Host + Team 1 -->
-                <div class="left-videos">
-                    <div id="videoHost" class="video-frame video-host">HOST</div>
-                    <div id="videoTeam1" class="video-frame video-team1">TEAM 1</div>
-                </div>
+                <!-- Host Video -->
+                <div id="videoHost" class="video-frame video-host">HOST</div>
                 
-                <!-- Center: Score Display -->
+                <!-- Team 1 Video -->
+                <div id="videoTeam1" class="video-frame video-team1">TEAM 1</div>
+                
+                <!-- Scores -->
                 <div class="score-display">
                     <div class="team-score" id="team1ScoreDisplay">
                         <h3 id="team1NameDisplay">Team 1</h3>
@@ -63,11 +63,11 @@
                     </div>
                 </div>
                 
-                <!-- Right Column: Team 2 + Stream -->
-                <div class="right-videos">
-                    <div id="videoTeam2" class="video-frame video-team2">TEAM 2</div>
-                    <div id="videoStream" class="video-frame video-stream">STREAM</div>
-                </div>
+                <!-- Team 2 Video -->
+                <div id="videoTeam2" class="video-frame video-team2">TEAM 2</div>
+                
+                <!-- Stream Video -->
+                <div id="videoStream" class="video-frame video-stream">STREAM</div>
             </div>
 
             <!-- Game Board -->
