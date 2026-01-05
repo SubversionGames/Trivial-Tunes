@@ -18,7 +18,7 @@ const database = firebase.database();
 // ============================================
 
 // IMPORTANT: Replace this with your Daily.co room URL
-const DAILY_ROOM_URL = "https://YOUR-DOMAIN.daily.co/YOUR-ROOM-NAME";
+const DAILY_ROOM_URL = "https://subversion-games.daily.co/TrivialTunes";
 
 let dailyCallObject = null;
 
