@@ -45,22 +45,40 @@
             
             <!-- Main Game Layout -->
             <div class="game-layout">
-                <!-- Host Video - Left side -->
-                <div id="videoHost" class="video-frame video-host">HOST</div>
                 
-                <!-- Team 1 Video - Above left of board -->
-                <div id="videoTeam1" class="video-frame video-team1">TEAM 1</div>
+                <!-- Top Row: Videos and Scores -->
+                <div class="top-row">
+                    <!-- Host Video -->
+                    <div id="videoHost" class="video-frame video-host">HOST</div>
+                    
+                    <!-- Team 1 Video -->
+                    <div id="videoTeam1" class="video-frame video-team1">TEAM 1</div>
+                    
+                    <!-- Team 1 Score -->
+                    <div class="team-score" id="team1ScoreDisplay">
+                        <h3 id="team1NameDisplay">Team 1</h3>
+                        <div class="score-value" onclick="editScore('team1')" id="team1Score">0</div>
+                    </div>
+                    
+                    <!-- Team 2 Score -->
+                    <div class="team-score" id="team2ScoreDisplay">
+                        <h3 id="team2NameDisplay">Team 2</h3>
+                        <div class="score-value" onclick="editScore('team2')" id="team2Score">0</div>
+                    </div>
+                    
+                    <!-- Team 2 Video -->
+                    <div id="videoTeam2" class="video-frame video-team2">TEAM 2</div>
+                    
+                    <!-- Stream Video -->
+                    <div id="videoStream" class="video-frame video-stream">STREAM</div>
+                </div>
                 
-                <!-- Team 2 Video - Above right of board -->
-                <div id="videoTeam2" class="video-frame video-team2">TEAM 2</div>
-                
-                <!-- Stream Video - Right side -->
-                <div id="videoStream" class="video-frame video-stream">STREAM</div>
-                
-                <!-- Game Board - Center -->
+                <!-- Game Board - Below everything -->
                 <div id="gameBoard" class="game-board">
                     <!-- Categories will be generated here by JavaScript -->
                 </div>
+                
+            </div>
                 
                 <!-- Score Display - Below board -->
                 <div class="score-display">
