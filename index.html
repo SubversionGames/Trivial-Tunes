@@ -43,20 +43,30 @@
         <!-- Main Game Screen (hidden until game starts) -->
         <div id="gameScreen" style="display: none;">
             
-            <!-- Video Chat Container -->
-            <div id="videoContainer" class="video-container">
-                <!-- Daily.co iframe will be injected here -->
-            </div>
-
-            <!-- Score Display -->
-            <div class="score-display">
-                <div class="team-score" id="team1ScoreDisplay">
-                    <h3 id="team1NameDisplay">Team 1</h3>
-                    <div class="score-value" onclick="editScore('team1')" id="team1Score">0</div>
-                </div>
-                <div class="team-score" id="team2ScoreDisplay">
-                    <h3 id="team2NameDisplay">Team 2</h3>
-                    <div class="score-value" onclick="editScore('team2')" id="team2Score">0</div>
+            <!-- Top Bar: Videos and Scores -->
+            <div class="top-bar">
+                <!-- Host Video - Top Left -->
+                <div id="videoHost" class="video-frame video-host"></div>
+                
+                <!-- Stream Video - Top Right -->
+                <div id="videoStream" class="video-frame video-stream"></div>
+                
+                <!-- Team 1 Videos - Bottom Left -->
+                <div id="videoTeam1" class="video-frame video-team1"></div>
+                
+                <!-- Team 2 Videos - Bottom Right -->
+                <div id="videoTeam2" class="video-frame video-team2"></div>
+                
+                <!-- Score Display - Center -->
+                <div class="score-display">
+                    <div class="team-score" id="team1ScoreDisplay">
+                        <h3 id="team1NameDisplay">Team 1</h3>
+                        <div class="score-value" onclick="editScore('team1')" id="team1Score">0</div>
+                    </div>
+                    <div class="team-score" id="team2ScoreDisplay">
+                        <h3 id="team2NameDisplay">Team 2</h3>
+                        <div class="score-value" onclick="editScore('team2')" id="team2Score">0</div>
+                    </div>
                 </div>
             </div>
 
