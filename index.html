@@ -79,17 +79,17 @@
                 </div>
                 
             </div>
-                
-                <!-- Score Display - Below board -->
-                <div class="score-display">
-                    <div class="team-score" id="team1ScoreDisplay">
-                        <h3 id="team1NameDisplay">Team 1</h3>
-                        <div class="score-value" onclick="editScore('team1')" id="team1Score">0</div>
-                    </div>
-                    <div class="team-score" id="team2ScoreDisplay">
-                        <h3 id="team2NameDisplay">Team 2</h3>
-                        <div class="score-value" onclick="editScore('team2')" id="team2Score">0</div>
-                    </div>
+
+            <!-- Clue Display (shown when a clue is selected) -->
+            <div id="clueDisplay" class="clue-display" style="display: none;">
+                <div class="clue-category" id="clueCategory"></div>
+                <div class="clue-value" id="clueValue"></div>
+                <div class="clue-content" id="clueContent">
+                    <p>Song is playing...</p>
+                </div>
+                <!-- Answer display (only for Host and Stream when revealed) -->
+                <div class="clue-answer" id="clueAnswer" style="display: none;">
+                    <strong>Answer:</strong> <span id="answerText"></span>
                 </div>
             </div>
 
